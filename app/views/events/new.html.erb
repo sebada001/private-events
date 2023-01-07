@@ -1,0 +1,15 @@
+<%= form_with model: @event do |form| %>
+  <%= form.label(:date, "Date:")%>
+  <%= form.date_select(:date)%>
+  <%= form.label(:location, "Location:")%>
+  <%= form.text_field(:location)%>
+  <%= form.submit("Submit!")%>
+<% end %>
+
+<% if @event.errors.any? %>
+    <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+<% end %>

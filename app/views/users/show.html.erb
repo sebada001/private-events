@@ -1,0 +1,16 @@
+<h1>Events you have created:</h1>
+
+<% @user.events_created.each_with_index do |e,i| %>
+    <h3> Event #<%= (i+1) %>:</h3>
+    <p> Location: <%= e.location %> </p>
+    <p> Date: <%= e.date %> </p>
+ <% end %>
+
+<%= button_to(
+    "Log Out",
+    destroy_user_session_path,
+    method: :delete
+) %>
+<%= button_to "Create event", new_event_path, method: :get %>
+
+<h5> welcome <%= @user.email %> </h5>
