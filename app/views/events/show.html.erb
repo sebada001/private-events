@@ -1,0 +1,6 @@
+<h1>Event information: </h1>
+<p>Created by: <%=@event.creator.email%></p>
+<p>Location: <%= @event.location %></p>
+<p>Date: <%= @event.date%></p>
+
+<%= button_to "Your events", user_path, method: :get %>

@@ -13,10 +13,14 @@ class EventsController < ApplicationController
         @event = current_user.events_created.new(event_params)
     
         if @event.save
-            redirect_to users_path
+            redirect_to event_url(@event)
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    def show
+        @event = Event.find(params[:id])
     end
 
     private
