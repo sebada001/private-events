@@ -13,15 +13,22 @@ class EventsController < ApplicationController
         @event = current_user.events_created.new(event_params)
     
         if @event.save
-            redirect_to users_path
+            redirect_to event_url(@event)
         else
             render :new, status: :unprocessable_entity
         end
     end
 
+    def show
+        @event = Event.find(params[:id])
+        @user = current_user
+    end
+
     private
     def event_params
-        params.require(:post).permit(:location, :date)
+        params.require(:event).permit(:location, :date)
     end
   
 end
+
+# bin/rails g migration CreateJoinTableAttendeeAttendedEvent users events

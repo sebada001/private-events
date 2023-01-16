@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :events
   root "users#show"
+
+  resources :event_attendances
   
 end

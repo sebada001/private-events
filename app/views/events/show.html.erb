@@ -1,6 +1,13 @@
+<%= button_to "Your events", user_path, method: :get %>
+
 <h1>Event information: </h1>
 <p>Created by: <%=@event.creator.email%></p>
 <p>Location: <%= @event.location %></p>
 <p>Date: <%= @event.date%></p>
+<div>
+    Attendees: 
+    <% @event.attendants.each do |a| %>
+    <p><%= a%></p>
+    <% end %>
+</div>
 
-<%= button_to "Your events", user_path, method: :get %>

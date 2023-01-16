@@ -1,0 +1,11 @@
+<%= form_with model: @event_attendance do |form| %>
+  <%# <%= form.submit("Submit!")%> 
+<% end %>
+
+<% if @event_attendance.errors.any? %>
+    <ul>
+    <% @event_attendance.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+<% end %>

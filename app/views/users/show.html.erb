@@ -1,16 +1,51 @@
-<h1>Events you have created:</h1>
-
-<% @user.events_created.each_with_index do |e,i| %>
-    <h3> Event #<%= (i+1) %>:</h3>
-    <p> Location: <%= e.location %> </p>
-    <p> Date: <%= e.date %> </p>
- <% end %>
-
+<div style="margin-bottom: 5em;"></div>
 <%= button_to(
     "Log Out",
     destroy_user_session_path,
     method: :delete
 ) %>
 <%= button_to "Create event", new_event_path, method: :get %>
+<%= button_to "All events", events_path, method: :get%>
+
+<h1>Events you have created:</h1>
+<div style="display: flex; width: 80%; flex-wrap: wrap;">
+<% @user.events_created.each_with_index do |e,i| %>
+    <div style="display: flex; flex-direction: column; margin: 0.5em; padding: 0.5em; border: 1px solid grey;">
+        <h3> Event #<%= (i+1) %>:</h3>
+        <p> Location: <%= e.location %> </p>
+        <%=  link_to "Details", event_path(e) %>
+        <p> Date: <%= e.date %> </p>
+        <% if !e.attendants.empty? %>
+            <div>
+            Attendees: 
+            <% e.attendants.each do |a| %>
+            <p>- <%= a.email %></p>
+            <% end %>
+            </div>
+            <% end %>
+    </div>
+<% end %>
+</div>
+<h1>Events you will attend:</h1>
+<div style="display: flex; width: 80%; flex-wrap: wrap;">
+<% @user.events_attended.future.each_with_index do |e,i| %>
+    <div style="display: flex; flex-direction: column; margin: 0.5em; padding: 0.5em; border: 1px solid grey;">
+        <h3> Event #<%= (i+1) %>:</h3>
+        <p> Location: <%= e.location %> </p>
+        <%=  link_to "Details", event_path(e) %>
+    </div>
+<% end %>
+</div>
+<h1>Events you have attended:</h1>
+<div style="display: flex; width: 80%; flex-wrap: wrap;">
+<% @user.events_attended.past.each_with_index do |e,i| %>
+    <div style="display: flex; flex-direction: column; margin: 0.5em; padding: 0.5em; border: 1px solid grey;">
+        <h3> Event #<%= (i+1) %>:</h3>
+        <p> Location: <%= e.location %> </p>
+        <%=  link_to "Details", event_path(e) %>
+    </div>
+<% end %>
+</div>
+
 
 <h5> welcome <%= @user.email %> </h5>
